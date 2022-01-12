@@ -114,23 +114,23 @@ export default function New_Exercise() {
                     <form>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">Username</label>
-                            <input onChange={add_name} type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                            <div id="emailHelp" className="form-text">Enter your username here.</div>
+                            <input onChange={add_name} type="text" className="form-control" aria-describedby="emailHelp" />
+                            <div className="form-text">Enter your username here.</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                            <input onChange={add_password} type="password" className="form-control" id="exampleInputPassword1" />
-                            <div id="emailHelp" className="form-text">Too many incorrect attempts may lead to locking of your account.</div>
+                            <input onChange={add_password} type="password" className="form-control" />
+                            <div className="form-text">Too many incorrect attempts may lead to locking of your account.</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">Exercise description</label>
-                            <input onChange={add_description} type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                            <div id="emailHelp" className="form-text">Briefly describe your physical activity.</div>
+                            <input onChange={add_description} type="text" className="form-control" aria-describedby="emailHelp" />
+                            <div className="form-text">Briefly describe your physical activity.</div>
                         </div>
                         <div className="mb-3">
                             <label htmlFor="exampleInputEmail1" className="form-label">Duration in minutes</label>
-                            <input onChange={add_duration} type="number" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                            <div id="emailHelp" className="form-text">Set the duration of your exercise.</div>
+                            <input onChange={add_duration} type="number" className="form-control" aria-describedby="emailHelp" />
+                            <div className="form-text">Set the duration of your exercise.</div>
                         </div>
                         <button type="submit" onClick={submitted} className="btn btn-primary">Submit</button>
                     </form>

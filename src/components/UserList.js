@@ -1,28 +1,16 @@
 import React from 'react'
 import image from './image4.png'
 import axios from 'axios'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 export default function UserList() {
 
     const [list, setlist] = useState([]);
 
-    function fetchlist() {
-        display_users();
+    useEffect(() => {
+        axios.get('http://localhost:1000/all_users').then((response) => {
 
-        return list.map((elem) => {
-            return (
-                <>
-                    <li class="list-group-item my-2">{elem}</li>
-                    {/* <div className="container in-center mx-2 my-2 list-group-item">{elem}</div>  */}
-                </>
-            );
-        })
-    }
-
-    function display_users() {
-        axios.get('http://localhost:1000/all_users').then(response => {
             let temp = [];
             let data = response.data;
 
@@ -30,15 +18,22 @@ export default function UserList() {
                 temp.push(data[i].username);
             }
 
-            if (temp.length != list.length) {
-                setlist(temp);
-            }
+            setlist(temp);
 
-        }).catch(err => {
-            console.log("axios GET request error");
+        }).catch((err) => {
+            console.log("GET request error");
+        })
+    }, [])
+
+    function fetchlist() {
+        return list.map((elem) => {
+            return (
+                <>
+                    <li className="list-group-item my-2">{elem}</li>
+                </>
+            );
         })
     }
-
 
     return (
         <>
@@ -53,11 +48,7 @@ export default function UserList() {
                     <h5>This is the list of all our users</h5>
                 </div>
                 <div className="card-body">
-
-                    <ul class="list-group in-center my-2 container">
-                        {fetchlist()}
-                    </ul>
-
+                    <ul className="list-group in-center my-2 container">{fetchlist()}</ul>
                 </div>
             </div>
 

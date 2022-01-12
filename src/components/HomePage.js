@@ -1,7 +1,7 @@
 import React from 'react'
 import image from './image7.jpeg'
 import axios from 'axios'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
 
@@ -9,27 +9,7 @@ export default function HomePage() {
 
     const [list, setlist] = useState([]);
 
-    function fetchlist() {
-
-        renderTableData();
-
-        return list.map((elem) => {
-            return (
-                <>
-                    {console.log('inside JSX', elem)}
-                    <tr>
-                        <th scope="row">{elem.no}</th>
-                        <td>{elem.username}</td>
-                        <td>{elem.description}</td>
-                        <td>{elem.duration}</td>
-                    </tr>
-                </>
-            );
-        })
-    }
-
-    function renderTableData() {
-
+    useEffect(() => {
         axios.get('http://localhost:1000/all_exercises').then((response) => {
 
             let temp = []
@@ -39,8 +19,6 @@ export default function HomePage() {
                 description: "",
                 duration: 0,
             };
-
-
             let data = response.data;
             console.log('Response data is here:', response.data);
             console.log('aapke data ka size: ', data.length);
@@ -52,25 +30,36 @@ export default function HomePage() {
                     username: element.username,
                     description: element.description,
                     duration: element.duration
-                }
+                } ;
 
                 temp.push(obj);
-                // console.log('oBJECT', obj)
-                // console.log('temp is  ', temp)
+
             });
 
-            if (list.length != temp.length) {
-                setlist(temp);
-            }
-
-            console.log('aapki list ka size: ', list.length);
-            console.log('List Array ', list);
+            console.log("list is here" , temp) ;
+            console.log('aapki list ka size: ', temp.length);
+            setlist(temp) ;
 
         }).catch((err) => {
             console.log("GET request error");
         })
-    }
+    }, [])
 
+
+    function fetchlist() {
+        return list.map((elem) => {
+            return (
+                <>
+                    <tr>
+                        <th scope="row">{elem.no}</th>
+                        <td>{elem.username}</td>
+                        <td>{elem.description}</td>
+                        <td>{elem.duration}</td>
+                    </tr>
+                </>
+            );
+        })
+    }
 
 
     return (
@@ -100,15 +89,10 @@ export default function HomePage() {
                                 <th scope="col"></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            {fetchlist()}
-                        </tbody>
+                        <tbody>{fetchlist()}</tbody>
                     </table>
                 </div>
             </div>
-
-
-
         </>
     )
 }
