@@ -29,6 +29,7 @@ export default function New_Exercise() {
 
         if (exercise.username == '' || exercise.password == '' || exercise.description == '' || exercise.duration == 0) {
             console.log("Please enter all the fields.");
+            alert("Please enter all the fields.") ;
 
             <div className="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>ERROR </strong> Please enter all the fields.
@@ -58,6 +59,8 @@ export default function New_Exercise() {
 
             if (verify_pass == false) {
                 console.log("ERROR. Either the password entered is wrong or no such user exists.");
+                alert("ERROR. Either the password entered is wrong or no such user exists.") ;
+
 
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>ERROR </strong> Either the password entered is wrong or no such user exists.
@@ -78,6 +81,7 @@ export default function New_Exercise() {
             axios.post('http://localhost:1000/new_exercise', to_db).then((res) => {
 
                 console.log("SUCCESS IN ADDING EXERCISE!!");
+                alert("SUCCESS IN ADDING EXERCISE!!") ;
                 <div className="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>SUCCESS </strong> New exercise added successfully.
                     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -85,13 +89,14 @@ export default function New_Exercise() {
 
 
             }).catch(err => {
+                alert("error in connecting to axios POST in add_exercise") ;
                 console.log("error in connecting to axios POST in add_exercise");
             });
 
         }).catch((err) => {
             console.log("axios GET error in all_users API");
+            alert("axios GET error in all_users API") ;
         });
-
 
         //    window.location = '/'  ;
     }

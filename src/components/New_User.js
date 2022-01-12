@@ -17,6 +17,7 @@ export default function New_User() {
         if (user.username == '' || user.password == '') {
 
             console.log("Please enter all the fields.");
+            alert("Please enter all the fields.") ;
 
             <div className="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong>ERROR </strong> Please enter all the fields.
@@ -43,6 +44,7 @@ export default function New_User() {
                 axios.post('http://localhost:1000/new_user', user).then((res) => {
 
                     console.log("SUCCESS IN ADDING USER!!");
+                    alert("SUCCESS IN ADDING USER!!") ;
 
                     <div className="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>SUCCESS </strong> New user is added to the database.
@@ -56,6 +58,7 @@ export default function New_User() {
 
             else {
                 console.log("SORRY, this username is already taken");
+                alert("SORRY, this username is already taken") ;
 
                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>ERROR </strong> This username already exists.
@@ -66,6 +69,7 @@ export default function New_User() {
 
         }).catch(err => {
             console.log("axios GET request error");
+            alert("axios GET request error") ;
         })
 
         // window.location = '/';
